@@ -4,12 +4,13 @@ const users={};
 
 io.on('connection',socket=>{
     socket.on('new-user-joined',name=>{
+        console.log("New user ",name)
         users[socket.id]=name;
        socket.broadcast.emit('user-joined',name);
     })
 
     socket.on('send',message=>{
 
-        socket.broadcast.emit('recieve',{message,name:users[socket.id]})
+        socket.broadcast.emit('recieve',{message: message ,name:users[socket.id]})
     })
-})
+});
